@@ -9,4 +9,14 @@ class App:
         response = ulr.urlopen(url)
         applistjson = json.loads(response.read())
         appList = applistjson['applist']['apps']['app']
-        return appList
+
+        return AppList(appList)
+
+class AppList:
+    def __init__(self, appList):
+        self.appList = appList
+        self.list = {}
+        for app in appList:
+            self.list[app["appid"]] = app["name"]
+        print(self.list)
+
